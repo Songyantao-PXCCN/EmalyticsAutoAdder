@@ -1,0 +1,20 @@
+/* Module Build File */
+
+description     = ""
+ext {
+}
+niagaraModule {
+  moduleName = "AutoAdder"
+  preferredSymbol = "a"
+  runtimeProfile = "rt"
+}
+
+dependencies {
+  compile "Tridium:nre:4.8"
+  compile "Tridium:baja:4.8"
+}
+
+moduleTestJar {
+  from('srcTest') {
+  }
+}

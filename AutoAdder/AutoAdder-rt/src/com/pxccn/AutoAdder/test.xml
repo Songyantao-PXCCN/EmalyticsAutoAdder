@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+    <createComponent m="AutoAdder" t="Test1" n="A1">
+        <createComponent m="AutoAdder" t="Test1" n="A5"/>
+        <createComponent m="AutoAdder" t="Test1" n="A6">
+            <createComponent m="AutoAdder" t="Test1" n="A7"/>
+        </createComponent>
+    </createComponent>
+    <createComponent m="AutoAdder" t="Test1" n="A2"/>
+    <createComponent m="AutoAdder" t="Test1" n="A3"/>
+    <createComponent m="AutoAdder" t="Test1" n="A4"/>
+
+</EmalyticsAutoWorker>

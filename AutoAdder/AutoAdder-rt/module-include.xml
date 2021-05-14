@@ -1,0 +1,9 @@
+<!-- Module Include File -->
+<!-- Types -->
+<types>
+  <!-- Type Example:<type name="MyClass" class="com.acme.BMyClass"/> -->
+  <!--com.pxccn.AutoAdder-->
+  <type class="com.pxccn.AutoAdder.BXML_Adder" name="XML_Adder"/>
+  <!--com.pxccn.AutoAdder.testModule-->
+  <type class="com.pxccn.AutoAdder.testModule.BTest1" name="Test1"/>
+</types>
