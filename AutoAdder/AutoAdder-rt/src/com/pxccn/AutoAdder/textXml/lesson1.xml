@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+
+    <!--    添加功能块方式 1  -->
+    <!--    addSlot 向当前层级添加 slot ，下一层及有且只能有1个 new...-->
+    <!--    本例向当前层级添加了一个文件夹-->
+    <addSlot n="byAddSlot">
+        <newComponent t="baja:Folder"/>
+    </addSlot>
+
+    <!--    本例向当前层级添加了一个文件夹，并带有Flag （默认为 0）-->
+    <addSlot n="byAddSlot_HIDDEN" f="4"><!-- 4:HIDDEN -->
+        <newComponent t="baja:Folder"/>
+    </addSlot>
+
+
+    <!--    添加功能块方式 2  （快捷方式）-->
+    <createComponent t="baja:Folder" n="byCreateComponent"/>
+    <createComponent t="baja:Folder" n="byCreateComponent_HIDDEN" f="4"/>
+
+
+</EmalyticsAutoWorker>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+
+    <!--
+    本例展示了如何添加一个功能块的同时，在其内部已有Slot上再进行操作（getSlot）
+    -->
+
+    <!-- 展示本例中Test1模块的原始形态 -->
+    <addSlot n="rawInstance">
+        <newComponent t="AutoAdder:Test1"/>
+    </addSlot>
+
+    <!-- 基础写法 -->
+    <addSlot n="addFieldInModule">
+        <newComponent t="AutoAdder:Test1" n="rawInstance">
+            <addSlot n="p1">
+                <newComponent t="control:BooleanWritable"/>
+            </addSlot>
+            <addSlot n="p2">
+                <newComponent t="control:BooleanWritable"/>
+            </addSlot>
+            <getSlot n="folder">
+                <addSlot n="p2">
+                    <newComponent t="control:BooleanWritable"/>
+                </addSlot>
+            </getSlot>
+        </newComponent>
+    </addSlot>
+
+
+    <!--    全用快捷方式的最简单写法 -->
+    <createComponent t="AutoAdder:Test1" n="addFieldInModule2">
+        <createComponent t="control:BooleanWritable" n="p1"/>
+        <createComponent t="control:BooleanWritable" n="p2"/>
+        <getSlot n="folder">
+            <createComponent t="control:BooleanWritable" n="p3"/>
+        </getSlot>
+    </createComponent>
+
+
+</EmalyticsAutoWorker>

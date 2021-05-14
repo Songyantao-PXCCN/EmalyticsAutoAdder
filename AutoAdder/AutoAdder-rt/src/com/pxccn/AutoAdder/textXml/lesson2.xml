@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+
+    <!--    层级添加方式 1  -->
+    <!--    本例向当前层级添加了一个文件夹，其内部再增加一个文件夹-->
+    <addSlot n="haveChild">
+        <newComponent t="baja:Folder">
+            <addSlot n="child1">
+                <newComponent t="baja:Folder"/>
+            </addSlot>
+            <addSlot n="child2">
+                <newComponent t="baja:Folder">
+                    <addSlot n="child">
+                        <newComponent t="baja:Folder"/>
+                    </addSlot>
+                </newComponent>
+            </addSlot>
+        </newComponent>
+    </addSlot>
+
+
+    <!--    层级添加方式 2  （快捷方式）-->
+    <createComponent t="baja:Folder" n="havaChild2">
+        <createComponent t="baja:Folder" n="child1"/>
+        <createComponent t="baja:Folder" n="child2">
+            <createComponent t="baja:Folder" n="child"/>
+        </createComponent>
+    </createComponent>
+
+
+</EmalyticsAutoWorker>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+
+    <!--
+    本例展示了如何添加一个功能块的时一并改动其已有slot值及flag (setSlot setFlag)
+    -->
+
+    <!-- 展示本例中Test1模块的原始形态 -->
+    <addSlot n="rawInstance">
+        <newComponent t="AutoAdder:Test1"/>
+    </addSlot>
+
+    <!-- 基础写法 -->
+    <createComponent t="AutoAdder:Test1" n="addFieldInModule">
+        <!--修改名为boolField的slot，改为true-->
+        <setSlot n="boolField">
+            <newSimple t="boolean" v="true"/>
+        </setSlot>
+        <!--修改名为strField的slot，改为"PXC is invincible !!"并直接修改Flag-->
+        <setSlot n="strField" f="8"><!--8:SUMMARY-->
+            <newSimple t="string" v="PXC is invincible !!"/>
+        </setSlot>
+        <!--修改名为intField的slot，改为12345,并直接修改Flag-->
+        <setSlot n="intField">
+            <newSimple t="int" v="12345"/>
+        </setSlot>
+        <!--修改名为statusBoolean的slot，改为true{ok}-->
+        <getSlot n="statusBoolean">
+            <setSlot n="value">
+                <newSimple t="boolean" v="true"/>
+            </setSlot>
+            <setSlot n="status">
+                <newSimple t="BStatus" v="0"/><!--0 对应 ok 状态-->
+            </setSlot>
+        </getSlot>
+        <!--使用 setFlag 修改Flag ,注意也可以使用 setSlot 带 f 参数 -->
+        <setFlag n="statusBoolean" f="8"/>
+        <!--同上，但采用直接set方法，实践中更推荐上一方法-->
+        <!--
+                <setSlot n="statusBoolean" f="8">
+                    <newComponent t="baja:StatusBoolean">
+                        <setSlot n="value">
+                            <newSimple t="boolean" v="true"/>
+                        </setSlot>
+                        <setSlot n="status">
+                            <newSimple t="BStatus" v="0"/>
+                        </setSlot>
+                    </newComponent>
+                </setSlot>
+
+         -->
+    </createComponent>
+
+
+</EmalyticsAutoWorker>
