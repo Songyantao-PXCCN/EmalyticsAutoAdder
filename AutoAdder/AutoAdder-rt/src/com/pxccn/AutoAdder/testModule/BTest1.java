@@ -10,6 +10,7 @@
 
 package com.pxccn.AutoAdder.testModule;
 
+import javax.baja.nre.annotations.NiagaraAction;
 import javax.baja.nre.annotations.NiagaraProperty;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.status.BStatusBoolean;
@@ -31,11 +32,13 @@ import java.util.logging.Logger;
 @NiagaraProperty(name = "intField", type = "int", defaultValue = "0")
 @NiagaraProperty(name = "folder", type = "BFolder", defaultValue = "new BFolder()")
 @NiagaraProperty(name = "statusBoolean", type = "BStatusBoolean", defaultValue = "new BStatusBoolean()")
+@NiagaraProperty(name = "enumField", type = "BEnumTest", defaultValue = "BEnumTest.DEFAULT")
+@NiagaraAction(name="test")
 public class BTest1 extends BComponent {
     
 /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
-/*@ $com.pxccn.AutoAdder.testModule.BTest1(4026516882)1.0$ @*/
-/* Generated Sat May 15 00:16:25 CST 2021 by Slot-o-Matic (c) Tridium, Inc. 2012 */
+/*@ $com.pxccn.AutoAdder.testModule.BTest1(3815032052)1.0$ @*/
+/* Generated Sat May 15 16:57:06 CST 2021 by Slot-o-Matic (c) Tridium, Inc. 2012 */
 
 ////////////////////////////////////////////////////////////////
 // Property "boolField"
@@ -153,6 +156,45 @@ public class BTest1 extends BComponent {
   public void setStatusBoolean(BStatusBoolean v) { set(statusBoolean, v, null); }
 
 ////////////////////////////////////////////////////////////////
+// Property "enumField"
+////////////////////////////////////////////////////////////////
+  
+  /**
+   * Slot for the {@code enumField} property.
+   * @see #getEnumField
+   * @see #setEnumField
+   */
+  public static final Property enumField = newProperty(0, BEnumTest.DEFAULT, null);
+  
+  /**
+   * Get the {@code enumField} property.
+   * @see #enumField
+   */
+  public BEnumTest getEnumField() { return (BEnumTest)get(enumField); }
+  
+  /**
+   * Set the {@code enumField} property.
+   * @see #enumField
+   */
+  public void setEnumField(BEnumTest v) { set(enumField, v, null); }
+
+////////////////////////////////////////////////////////////////
+// Action "test"
+////////////////////////////////////////////////////////////////
+  
+  /**
+   * Slot for the {@code test} action.
+   * @see #test()
+   */
+  public static final Action test = newAction(0, null);
+  
+  /**
+   * Invoke the {@code test} action.
+   * @see #test
+   */
+  public void test() { invoke(test, null, null); }
+
+////////////////////////////////////////////////////////////////
 // Type
 ////////////////////////////////////////////////////////////////
   
@@ -161,6 +203,9 @@ public class BTest1 extends BComponent {
   public static final Type TYPE = Sys.loadType(BTest1.class);
 
 /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+
+  public void doTest(){
+  }
 
     @Override
     public void started() throws Exception {

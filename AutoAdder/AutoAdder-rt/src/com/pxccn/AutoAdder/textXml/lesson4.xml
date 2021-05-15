@@ -2,7 +2,7 @@
 <EmalyticsAutoWorker version="0.01">
 
     <!--
-    本例展示了如何添加一个功能块的时一并改动其已有slot值及flag (setSlot setFlag)
+    本例展示了如何添加一个功能块的同时一并改动其已有slot值及flag (setSlot setFlag)
     -->
 
     <!-- 展示本例中Test1模块的原始形态 -->
@@ -49,6 +49,11 @@
                 </setSlot>
 
          -->
+        <!--修改名为enumField的slot，改为 val2 (必须是可用的选项，不能凭空捏造)-->
+        <setSlot n="enumField">
+            <newSimple t="BFrozenEnum" v="val2"/>
+        </setSlot>
+
     </createComponent>
 
 

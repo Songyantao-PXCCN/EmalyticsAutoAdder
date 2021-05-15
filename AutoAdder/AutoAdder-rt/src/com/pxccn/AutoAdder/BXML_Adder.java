@@ -12,6 +12,7 @@ import com.tridium.nre.util.IElement;
 
 import javax.baja.nre.annotations.Facet;
 import javax.baja.nre.annotations.NiagaraAction;
+import javax.baja.nre.annotations.NiagaraProperty;
 import javax.baja.nre.annotations.NiagaraType;
 import javax.baja.status.BStatus;
 import javax.baja.sys.*;
@@ -31,40 +32,82 @@ import java.util.logging.Logger;
 
 @NiagaraType
 @NiagaraAction(name = "submit", defaultValue = "BString.DEFAULT", parameterType = "BString", facets = {@Facet(name = "BFacets.MULTI_LINE", value = "BBoolean.TRUE")})
+@NiagaraProperty(name = "ver", defaultValue = "", type = "String", flags = Flags.READONLY | Flags.TRANSIENT)
 public class BXML_Adder extends BComponent {
 
 
-    
-/*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
-/*@ $com.pxccn.AutoAdder.BXML_Adder(1597672472)1.0$ @*/
-/* Generated Sat May 15 03:07:26 CST 2021 by Slot-o-Matic (c) Tridium, Inc. 2012 */
+
+    /*+ ------------ BEGIN BAJA AUTO GENERATED CODE ------------ +*/
+    /*@ $com.pxccn.AutoAdder.BXML_Adder(49147491)1.0$ @*/
+    /* Generated Sat May 15 17:30:01 CST 2021 by Slot-o-Matic (c) Tridium, Inc. 2012 */
+
+////////////////////////////////////////////////////////////////
+// Property "ver"
+////////////////////////////////////////////////////////////////
+
+    /**
+     * Slot for the {@code ver} property.
+     *
+     * @see #getVer
+     * @see #setVer
+     */
+    public static final Property ver = newProperty(Flags.READONLY | Flags.TRANSIENT, "", null);
+
+    /**
+     * Get the {@code ver} property.
+     *
+     * @see #ver
+     */
+    public String getVer() {
+        return getString(ver);
+    }
+
+    /**
+     * Set the {@code ver} property.
+     *
+     * @see #ver
+     */
+    public void setVer(String v) {
+        setString(ver, v, null);
+    }
 
 ////////////////////////////////////////////////////////////////
 // Action "submit"
 ////////////////////////////////////////////////////////////////
-  
-  /**
-   * Slot for the {@code submit} action.
-   * @see #submit(BString parameter)
-   */
-  public static final Action submit = newAction(0, BString.DEFAULT, BFacets.make(BFacets.MULTI_LINE, BBoolean.TRUE));
-  
-  /**
-   * Invoke the {@code submit} action.
-   * @see #submit
-   */
-  public void submit(BString parameter) { invoke(submit, parameter, null); }
+
+    /**
+     * Slot for the {@code submit} action.
+     *
+     * @see #submit(BString parameter)
+     */
+    public static final Action submit = newAction(0, BString.DEFAULT, BFacets.make(BFacets.MULTI_LINE, BBoolean.TRUE));
+
+    /**
+     * Invoke the {@code submit} action.
+     *
+     * @see #submit
+     */
+    public void submit(BString parameter) {
+        invoke(submit, parameter, null);
+    }
 
 ////////////////////////////////////////////////////////////////
 // Type
 ////////////////////////////////////////////////////////////////
-  
-  @Override
-  public Type getType() { return TYPE; }
-  public static final Type TYPE = Sys.loadType(BXML_Adder.class);
 
-/*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+    @Override
+    public Type getType() {
+        return TYPE;
+    }
 
+    public static final Type TYPE = Sys.loadType(BXML_Adder.class);
+
+    /*+ ------------ END BAJA AUTO GENERATED CODE -------------- +*/
+    public static final String VERSION = "0.01";
+
+    public void started() {
+        this.setVer(VERSION);
+    }
 
     public void doSubmit(BString v) throws Exception {
         OperateDecoder decoder = new OperateDecoder(v.toString());
@@ -81,7 +124,6 @@ public class BXML_Adder extends BComponent {
     public BXML_Adder() {
     }
 
-    public static final String VERSION = "0.01";
 
     public static class OperateDecoder {
         private final OperateElement root;
@@ -121,15 +163,19 @@ public class BXML_Adder extends BComponent {
             createComponent((currentCursor, element) -> {
                 CreateComponentElement e = CreateComponentElement.make(element);
                 goNext(e.instance, e);
-                ((BComponent) currentCursor).add(e.slotName, e.instance, e.flag);
+                try {
+                    ((BComponent) currentCursor).add(e.slotName, e.instance, e.flag);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 return null;
             }),
             //获取指定的Slot
             getSlot((currentCursor, element) -> {
                 GetSlotElement e = GetSlotElement.make(element);
                 BValue value = ((BComplex) currentCursor).get(e.slotName);
-                if(value == null){
-                    throw new IllegalArgumentException("can not get slot :"+e.slotName);
+                if (value == null) {
+                    throw new IllegalArgumentException("can not get slot :" + e.slotName);
                 }
                 goNext(value, e);
                 return null;
@@ -138,36 +184,49 @@ public class BXML_Adder extends BComponent {
             addSlot((currentCursor, element) -> {
                 AddSlotElement e = AddSlotElement.make(element);
                 BValue value = doProcess(currentCursor, e.nextDeepOperateElements().get(0));
-                ((BComponent) currentCursor).add(e.slotName, value, e.flag);
+                try {
+                    ((BComponent) currentCursor).add(e.slotName, value, e.flag);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                }
                 return null;
             }),
             //对指定的Slot赋值,下一层级跟上实例
             setSlot((currentCursor, element) -> {
                 SetSlotElement e = SetSlotElement.make(element);
                 BValue value;
-                value = doProcess(currentCursor, e.nextDeepOperateElements().get(0));
+                BValue defaultValue = null;
+                if (((BComplex) currentCursor).getSlot(e.slotName).isProperty()) {
+                    defaultValue = ((BComplex) currentCursor).getSlot(e.slotName).asProperty().getDefaultValue();
+                }
+                value = doProcess(defaultValue, e.nextDeepOperateElements().get(0));
                 ((BComplex) currentCursor).set(e.slotName, value);
-                if(e.flag!=null){
+                if (e.flag != null) {
                     ((BComplex) currentCursor).setFlags(((BComplex) currentCursor).getSlot(e.slotName), e.flag);
                 }
                 return null;
             }),
             //创建Component，用于配合setValue或addSlot
-            newComponent((currentCursor, element) -> {
+            newComponent((defaultValue, element) -> {
                 NewComponentElement e = NewComponentElement.make(element);
                 goNext(e.instance, e);
                 return e.instance;
             }),
             //创建已知的Simple,用于配合setValue或addSlot
-            newSimple((currentCursor, element) -> {
+            newSimple((defaultValue, element) -> {
                 NewSimpleElement e = NewSimpleElement.make(element);
-                return e.instance;
+                if (e.EnumStr != null) {
+                    return ((BFrozenEnum) defaultValue).getRange().get(e.EnumStr);
+                } else {
+                    return e.instance;
+                }
             }),
             setFlag((currentCursor, element) -> {
                 SetFlagElement e = SetFlagElement.make(element);
                 ((BComplex) currentCursor).setFlags(((BComplex) currentCursor).getSlot(e.slotName), e.flag);
                 return null;
             }),
+
 
             ;
 
@@ -221,6 +280,7 @@ public class BXML_Adder extends BComponent {
         private NewSimpleElement(XElem elem) {
             super(elem);
             this.typeName = this.get("t");
+            String e = null;
             switch (this.typeName) {
                 case "boolean":
                 case "bool":
@@ -240,9 +300,14 @@ public class BXML_Adder extends BComponent {
                 case "BStatus":
                     this.instance = BStatus.make(this.geti("v"));
                     break;
+                case "BFrozenEnum":
+                    e = this.get("v");
+                    this.instance = null;
+                    break;
                 default:
                     this.instance = null;
             }
+            this.EnumStr = e;
         }
 
         public static NewSimpleElement make(OperateElement elem) {
@@ -251,6 +316,8 @@ public class BXML_Adder extends BComponent {
 
         public final String typeName;
         public final BValue instance;
+        public final String EnumStr;
+
     }
 
 

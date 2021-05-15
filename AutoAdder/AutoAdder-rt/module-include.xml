@@ -6,4 +6,5 @@
   <type class="com.pxccn.AutoAdder.BXML_Adder" name="XML_Adder"/>
   <!--com.pxccn.AutoAdder.testModule-->
   <type class="com.pxccn.AutoAdder.testModule.BTest1" name="Test1"/>
+  <type class="com.pxccn.AutoAdder.testModule.BEnumTest" name="EnumTest"/>
 </types>
