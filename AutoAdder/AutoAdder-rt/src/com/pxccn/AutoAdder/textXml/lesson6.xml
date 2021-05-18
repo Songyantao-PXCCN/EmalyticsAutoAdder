@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<EmalyticsAutoWorker version="0.01">
+
+    <!--
+    继Lesson4，新增 newSimple2 标签，通过 decodeFromString 生成 BSimple 实例
+    -->
+
+    <!-- 展示本例中Test1模块的原始形态 -->
+    <addSlot n="rawInstance">
+        <newComponent t="AutoAdder:Test1"/>
+    </addSlot>
+
+    <!-- 基础写法 -->
+    <createComponent t="AutoAdder:Test1" n="addFieldInModule">
+        <!--修改名为boolField的slot，改为true-->
+        <setSlot n="boolField">
+            <newSimple2>true</newSimple2>
+        </setSlot>
+        <!--修改名为strField的slot，改为"PXC is invincible !!"并直接修改Flag-->
+        <setSlot n="strField" f="8"><!--8:SUMMARY-->
+            <newSimple2>PXC is invincible !!</newSimple2>
+        </setSlot>
+        <!--修改名为intField的slot，改为12345,并直接修改Flag-->
+        <setSlot n="intField">
+            <newSimple2>12345</newSimple2>
+        </setSlot>
+        <!--修改名为statusBoolean的slot，改为true{ok}-->
+        <getSlot n="statusBoolean">
+            <setSlot n="value">
+                <newSimple2>true</newSimple2>
+            </setSlot>
+            <setSlot n="status">
+                <newSimple2>0</newSimple2>
+            </setSlot>
+        </getSlot>
+        <!--使用 setFlag 修改Flag ,注意也可以使用 setSlot 带 f 参数 -->
+        <setFlag n="statusBoolean" f="8"/>
+        <setSlot n="enumField">
+            <newSimple2>val2</newSimple2>
+        </setSlot>
+
+    </createComponent>
+
+
+</EmalyticsAutoWorker>

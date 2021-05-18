@@ -18,6 +18,7 @@ import javax.baja.status.BStatus;
 import javax.baja.sys.*;
 import javax.baja.xml.XElem;
 import javax.baja.xml.XParser;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -221,6 +222,17 @@ public class BXML_Adder extends BComponent {
                     return e.instance;
                 }
             }),
+            newSimple2((defaultValue, element) -> {
+                NewSimpleElement2 e = NewSimpleElement2.make(element);
+                try {
+                    Type t = defaultValue.getType();
+                    BValue ret = (BValue) t.getInstance();
+                    Method m = defaultValue.getType().getTypeClass().getMethod("decodeFromString", String.class);
+                    return (BValue) m.invoke(ret, e.decode);
+                } catch (Exception ex) {
+                    throw new RuntimeException(ex);
+                }
+            }),
             setFlag((currentCursor, element) -> {
                 SetFlagElement e = SetFlagElement.make(element);
                 ((BComplex) currentCursor).setFlags(((BComplex) currentCursor).getSlot(e.slotName), e.flag);
@@ -275,12 +287,27 @@ public class BXML_Adder extends BComponent {
         public final BValue instance;
     }
 
+    public static class NewSimpleElement2 extends OperateElement {
+
+        private NewSimpleElement2(XElem elem) {
+            super(elem);
+            this.decode = elem.text().toString();
+        }
+
+        public static NewSimpleElement2 make(OperateElement elem) {
+            return elem == null ? null : new NewSimpleElement2(elem.getXmlElement());
+        }
+
+        public final String decode;
+    }
+
     public static class NewSimpleElement extends OperateElement {
 
         private NewSimpleElement(XElem elem) {
             super(elem);
             this.typeName = this.get("t");
             String e = null;
+            Integer bs = null;
             switch (this.typeName) {
                 case "boolean":
                 case "bool":
@@ -291,6 +318,16 @@ public class BXML_Adder extends BComponent {
                 case "int":
                 case "BInteger":
                     this.instance = BInteger.make(this.geti("v"));
+                    break;
+                case "Double":
+                case "double":
+                case "BDouble":
+                    this.instance = BDouble.make(this.getd("v"));
+                    break;
+                case "Float":
+                case "float":
+                case "BFloat":
+                    this.instance = BFloat.make(this.getf("v"));
                     break;
                 case "String":
                 case "string":
@@ -303,6 +340,9 @@ public class BXML_Adder extends BComponent {
                 case "BFrozenEnum":
                     e = this.get("v");
                     this.instance = null;
+                    break;
+                case "BRelTime":
+                    this.instance = BRelTime.make(this.getl("v"));
                     break;
                 default:
                     this.instance = null;
@@ -317,7 +357,6 @@ public class BXML_Adder extends BComponent {
         public final String typeName;
         public final BValue instance;
         public final String EnumStr;
-
     }
 
 

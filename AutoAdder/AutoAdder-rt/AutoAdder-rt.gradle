@@ -12,6 +12,9 @@ niagaraModule {
 dependencies {
   compile "Tridium:nre:4.8"
   compile "Tridium:baja:4.8"
+  compile "SysMik:sysmikScaIo-rt:1.0"
+  compile "Tridium:modbusAsync-rt:1.0"
+  compile "Tridium:modbusCore-rt:1.0"
 }
 
 moduleTestJar {
