@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="AutoAdder-rt-1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/AutoAdder/AutoAdder-rt/build/libs/AutoAdder-rt-1.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

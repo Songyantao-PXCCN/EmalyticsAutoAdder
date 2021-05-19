@@ -10,6 +10,8 @@ package com.pxccn.AutoAdder;/*
 
 import com.tridium.nre.util.IElement;
 
+import javax.baja.naming.BOrd;
+import javax.baja.naming.OrdTarget;
 import javax.baja.nre.annotations.Facet;
 import javax.baja.nre.annotations.NiagaraAction;
 import javax.baja.nre.annotations.NiagaraProperty;
@@ -158,6 +160,7 @@ public class BXML_Adder extends BComponent {
                 doProcess(currentCursor, n);
             }
         }
+        static Method setPermanentlySubscribed_method = null;
 
         enum Op {
             //创建Component并添加，等同于 addSlot + newComponent
@@ -238,6 +241,36 @@ public class BXML_Adder extends BComponent {
                 ((BComplex) currentCursor).setFlags(((BComplex) currentCursor).getSlot(e.slotName), e.flag);
                 return null;
             }),
+            link((c,element)->{
+                LinkElement e = LinkElement.make(element);
+                OrdTarget sourceTarget = e.from.resolve();
+                BComponent sourceComp =sourceTarget.getComponent();
+                Slot sourceSlot = sourceTarget.getSlotInComponent();
+
+                OrdTarget targetTarget = e.to.resolve();
+                BComponent targetComp =targetTarget.getComponent();
+                Slot targetSlot = targetTarget.getSlotInComponent();
+
+                targetComp.linkTo(e.linkName,sourceComp,sourceSlot,targetSlot);
+                return null;
+            }),
+//            permanentlySubscribe((c,element)->{
+//                PermanentlySubscribeElement e = PermanentlySubscribeElement.make(element);
+//                if (setPermanentlySubscribed_method == null){
+//                    try {
+//                        setPermanentlySubscribed_method = BComponent.class.getDeclaredMethod("setPermanentlySubscribed", Boolean.TYPE);
+//                        setPermanentlySubscribed_method.setAccessible(true);
+//                    }catch(NoSuchMethodException ex){
+//                        throw new RuntimeException(ex);
+//                    }
+//                }
+//                try {
+//                    setPermanentlySubscribed_method.invoke(e.comp, e.value);
+//                }catch(Exception ex){
+//                    ex.printStackTrace();
+//                }
+//                return null;
+//            })
 
 
             ;
@@ -252,6 +285,9 @@ public class BXML_Adder extends BComponent {
         interface Handler {
             BValue Process(BValue currentCursor, OperateElement element);
         }
+
+
+
 
     }
 
@@ -300,6 +336,39 @@ public class BXML_Adder extends BComponent {
 
         public final String decode;
     }
+
+    public static class LinkElement extends OperateElement {
+
+        private LinkElement(XElem elem) {
+            super(elem);
+            this.from = BOrd.make(this.get("from"));
+            this.to = BOrd.make(this.get("to"));
+            this.linkName = this.get("n",null);
+        }
+
+        public static LinkElement make(OperateElement elem) {
+            return elem == null ? null : new LinkElement(elem.getXmlElement());
+        }
+        public final BOrd from;
+        public final BOrd to;
+        public final String linkName;
+    }
+
+//    public static class PermanentlySubscribeElement extends OperateElement {
+//
+//        private PermanentlySubscribeElement(XElem elem) {
+//            super(elem);
+//            this.comp = BOrd.make(this.get("ord")).resolve().get().asComponent();
+//            this.value = this.getb("v");
+//        }
+//
+//        public static PermanentlySubscribeElement make(OperateElement elem) {
+//            return elem == null ? null : new PermanentlySubscribeElement(elem.getXmlElement());
+//        }
+//        public final BComponent comp;
+//        public final boolean value;
+//    }
+
 
     public static class NewSimpleElement extends OperateElement {
 
